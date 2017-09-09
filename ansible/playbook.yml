@@ -104,8 +104,8 @@
 
   # PHP
 
-  - name: add php5 ppa
-    apt_repository: repo='ppa:ondrej/php5'
+  #- name: add php5 ppa
+  #  apt_repository: repo='ppa:ondrej/php5'
 
   - name: install PHP5 packages
     apt: name={{ item }} state=latest
@@ -122,8 +122,8 @@
       - php5-xdebug
       - php5-memcache
       - php5-memcached
-      - php5-readline
-      - php5-sqlite
+      #- php5-readline
+      #- php5-sqlite
 
   - file: path=/etc/php5/conf.d state=directory
 
@@ -131,11 +131,11 @@
     notify: restart apache
 
   - name: symlink common php configuration for cli handler
-    file: src=/etc/php5/conf.d/php-site.ini dest=/etc/php5/cli/conf.d/php-site.ini state=link
+    file: src=/etc/php5/conf.d/php-site.ini dest=/etc/php5/cli/conf.d/php-site.ini state=link force=true
     notify: restart apache
 
   - name: symlink common php configuration for apache2 handler
-    file: src=/etc/php5/conf.d/php-site.ini dest=/etc/php5/apache2/conf.d/php-site.ini state=link
+    file: src=/etc/php5/conf.d/php-site.ini dest=/etc/php5/apache2/conf.d/php-site.ini state=link force=true
     notify: restart apache
 
   # phpmyadmin
@@ -145,17 +145,17 @@
   
   # Assets compilation
 
-  - name: add nodejs ppa
-    apt_repository: repo='ppa:chris-lea/node.js'
+  # - name: add nodejs ppa
+  #  apt_repository: repo='ppa:chris-lea/node.js'
 
-  - name: install nodejs
-    apt: name=nodejs state=latest
+  # - name: install nodejs
+  #  apt: name=nodejs state=latest
 
   - name: install rubygems
     apt: name=rubygems state=present
 
-  - name: install compass
-    command: gem install compass sass chunky_png fssm creates=/usr/local/bin/compass
+  # - name: install compass
+  #  command: gem install compass sass chunky_png fssm creates=/usr/local/bin/compass
 
   # Set up site
   #
